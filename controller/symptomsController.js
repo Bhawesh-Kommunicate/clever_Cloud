@@ -60,7 +60,7 @@ const SymptomStore = async (req, res) => {
           message: "Successfull",
           success: true,
           items: names,
-          data: response.data.question,
+          data: response.data.question.text,
         });
       } else {
         const recomander = await specialist(
