@@ -110,12 +110,8 @@ const getDefaultSymptoms = async (req, res) => {
     if (!myAge(response[i].name) == true) {
       temp.push({
         searchKey: response[i].name,
-        name: response[i].name,
-        metadata: {
-          // replyMetadata: {
-          //   KM_TRIGGER_EVENT: "Symptoms",
-          // },
-        },
+        name : response[i].name,
+        metadata: { KM_TRIGGER_EVENT: "symptoms" },
       });
       // temp.push(response[i].name)
     }
