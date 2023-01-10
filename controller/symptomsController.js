@@ -30,7 +30,7 @@ const SymptomStore = async (req, res) => {
   } else if (Userdata.symptoms !== undefined || Userdata.symptoms !== null) {
     let symptomArr = Userdata.symptoms.split(",");
     console.log(symptomArr);
-    if (symptomArr.length  > 2) {
+    if (symptomArr.length > 2) {
       //  if length got more than 2 we are going with diagnosis
       console.log("In diagnosis part");
       const response = await SymptomService.symptomsDiagonsis(
@@ -69,12 +69,11 @@ const SymptomStore = async (req, res) => {
           Userdata.Gender
         );
         return res.status(200).json({
-          data  : recomander,
+          data: recomander,
           message: "Successfull",
         });
       }
-    } 
-    else {
+    } else {
       // if )
       let arr = Userdata.symptoms.split(",");
       if (arr.includes(data.data.mentions[0].id)) {
@@ -86,7 +85,7 @@ const SymptomStore = async (req, res) => {
         console.log(store, "in else part");
         const SymptomStore = await storage.store(store, req.query.userId);
         // here talso we have to response for more symptoms;
-       return res.status(201).json({
+        return res.status(201).json({
           message: " Please add more symptoms ",
         });
       }
@@ -112,9 +111,7 @@ const getDefaultSymptoms = async (req, res) => {
       temp.push({
         searchKey: response[i].name,
         message: response[i].name,
-       
-          KM_TRIGGER_EVENT: "symptoms",
-      
+        metadata: { KM_TRIGGER_EVENT: "symptoms" },
       });
       // temp.push(response[i].name)
     }
