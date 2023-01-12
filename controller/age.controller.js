@@ -1,6 +1,6 @@
 
 const {age} = require("../service/age.service")
-const storage = await require("../service/store.service")
+const storage = require("../service/store.service")
 const StoreAge = async (req, res) => {
   console.log(req.body.userId);
     const response = await age(req.body.userId, req.body.age);
