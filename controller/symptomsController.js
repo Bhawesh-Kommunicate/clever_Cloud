@@ -33,7 +33,7 @@ const SymptomStore = async (req, res) => {
     console.log(symptomArr);
     if (symptomArr.length >= 2) {
       //  if length got more than 2 we are going with diagnosis
-      const EmptySymptomArr = await storage.store("undefined" , req.query.userId);
+      const EmptySymptomArr = await storage.store("not" , req.query.userId);
       console.log("In diagnosis part");
       const response = await SymptomService.symptomsDiagonsis(
         "token",
@@ -73,7 +73,7 @@ const SymptomStore = async (req, res) => {
           });
         }
         const EmptySymptomArr = await storage.store(
-          "undefined",
+          "not",
           req.query.userId
         );
         return res.status(200).json({
@@ -90,7 +90,7 @@ const SymptomStore = async (req, res) => {
         );
 
         const EmptySymptomArr = await storage.store(
-          "undefined",
+          "not",
           req.query.userId
         );
         return res.status(200).json({
