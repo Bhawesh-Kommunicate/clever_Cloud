@@ -56,7 +56,7 @@ const SymptomStore = async (req, res) => {
 
       if (response.data.conditions.length !== 0) {
         let condition = "";
-        condition += " "+ response.data.conditions.map((item) => item.common_name + " with probability "+ item.probability )
+        condition += " "+ response.data.conditions.map((item) => item.common_name + " with Possibility of "+ Number(item.probability*100) )
         // for (let i = 0; i < response.data.conditions.length; i++) {
         //   condition +=
         //     response.data.conditions[i].common_name +
