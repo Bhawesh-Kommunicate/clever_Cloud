@@ -19,7 +19,7 @@ const SymptomStore = async (req, res) => {
   );
   // console.log(data.data.mentions[0].id)
 
-  if (Userdata.symptoms == undefined || Userdata.symptoms == "undefined") {
+  if (Userdata.symptoms == undefined || Userdata.symptoms == "undefined" || Userdata.symptoms == "not") {
     let store = data.data.mentions[0].id;
 
     console.log("undefined wala");
@@ -28,7 +28,7 @@ const SymptomStore = async (req, res) => {
     return res.status(200).json({
       message: "Please add more symptoms",
     });
-  } else if (Userdata.symptoms !== undefined || Userdata.symptoms !== null) {
+  } else if (Userdata.symptoms !== undefined || Userdata.symptoms !== null || Userdata.symptoms !== "not") {
     let symptomArr = Userdata.symptoms.split(",");
     console.log(symptomArr);
     if (symptomArr.length >= 2) {
