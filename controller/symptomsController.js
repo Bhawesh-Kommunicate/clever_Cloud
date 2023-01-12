@@ -43,7 +43,7 @@ const SymptomStore = async (req, res) => {
         response.data.question,
         "response.data.question response.data.question response.data.question "
       );
-      if (response && response.data.question != null) {
+     if (response && response.data.question != null) {
         const names = [];
         for (let i = 0; i < response.data.question.items.length; i++) {
           names.push({
@@ -86,7 +86,7 @@ const SymptomStore = async (req, res) => {
         const SymptomStore = await storage.store(store, req.query.userId);
         // here talso we have to response for more symptoms;
         return res.status(201).json({
-          message: " Please add more symptoms ",
+          message: " Please add more symptoms",
         });
       }
     }
