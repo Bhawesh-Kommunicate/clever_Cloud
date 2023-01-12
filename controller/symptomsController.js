@@ -49,14 +49,14 @@ const SymptomStore = async (req, res) => {
         Userdata.Gender,
         symptomArr
       );
-      console.log(
-        response.data.question,
-        "response.data.question response.data.question response.data.question "
-      );
+      // console.log(
+      //   response.data.question,
+      //   "response.data.question response.data.question response.data.question "
+      // );
 
       if (response.data.conditions.length !== 0) {
         let condition = "";
-        condition += response.data.conditions.map((item) => item.common_name + " with probability "+ item.probability )
+        condition += " "+ response.data.conditions.map((item) => item.common_name + " with probability "+ item.probability )
         // for (let i = 0; i < response.data.conditions.length; i++) {
         //   condition +=
         //     response.data.conditions[i].common_name +
