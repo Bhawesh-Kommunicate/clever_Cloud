@@ -85,8 +85,8 @@ const SymptomStore = async (req, res) => {
         console.log(store, "in else part");
         const SymptomStore = await storage.store(store, req.query.userId);
         // here talso we have to response for more symptoms;
-        return res.status(201).json({
-          message: " Please add more symptoms",
+        return res.status(200).json({
+          message: "Please add different symptoms",
         });
       }
     }
