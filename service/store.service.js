@@ -1,35 +1,65 @@
 const axios = require("axios");
 require("dotenv").config()
-const store = (symptoms , userId) => {
-  var data = JSON.stringify({
-    metadata: {
-      symptoms: `${symptoms}`,
-    },
-  });
-
-  var config = {
-    method: "post",
-    url: "https://services.kommunicate.io/rest/ws/user/update",
-    headers: {
-      "Api-Key": `${process.env.Kommunicate_Key}`,
-      "Of-User-Id": `${userId}`,
-      "Content-Type": "application/json",
-      Cookie: "JSESSIONID=1D59FBEEB2E7A536228F72549E152FE1",
-    },
-    data: data,
-  };
-
-  var response = axios(config)
+const store =async (symptoms , userId) => {
+  // console.log(userId)
+  if(symptoms !== "undefined"){
+    var data = JSON.stringify({
+      "metadata": {
+        "symptoms": `${symptoms}`
+      }
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://services.kommunicate.io/rest/ws/user/update',
+      headers: { 
+        'Api-key': `${process.env.Kommunicate_Key}`, 
+        'Of-User-Id': `${userId}`, 
+        'Content-Type': 'application/json', 
+        // 'Cookie': 'JSESSIONID=5B2C2F1D9961BB70241401653225CD25'
+      },
+      data : data
+    };
+    
+    axios(config)
     .then(function (response) {
-      //   console.log(JSON.stringify(response.data));
-      return response.data;
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });  
+  }else{
+    var data = JSON.stringify({
+      "metadata": {
+        "symptoms": "undefined"
+      }
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://services.kommunicate.io/rest/ws/user/update',
+      headers: { 
+        'Api-key': `${process.env.Kommunicate_Key}`, 
+        'Of-User-Id': `${userId}`, 
+        'Content-Type': 'application/json', 
+        // 'Cookie': 'JSESSIONID=5B2C2F1D9961BB70241401653225CD25'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
     })
     .catch(function (error) {
       console.log(error);
     });
+    
+  }
 
-  return response;
+  // return response;
 };
 module.exports = {
     store
 }
+// console.log(store(undefined , "EbMEMBbggbvndEdNND79WFMVN18dPGuQ"));

@@ -19,8 +19,9 @@ const SymptomStore = async (req, res) => {
   );
   // console.log(data.data.mentions[0].id)
 
-  if (Userdata.symptoms == undefined) {
+  if (Userdata.symptoms == undefined || Userdata.symptoms == "undefined") {
     let store = data.data.mentions[0].id;
+
     console.log("undefined wala");
     const symptomsStorage = await storage.store(store, req.query.userId);
     // from here if it is undefined got true we have response for more symptoms "RETURN FROM HERE"
@@ -32,6 +33,7 @@ const SymptomStore = async (req, res) => {
     console.log(symptomArr);
     if (symptomArr.length >= 2) {
       //  if length got more than 2 we are going with diagnosis
+      const EmptySymptomArr = await storage.store("undefined" , req.query.userId);
       console.log("In diagnosis part");
       const response = await SymptomService.symptomsDiagonsis(
         "token",
@@ -43,7 +45,22 @@ const SymptomStore = async (req, res) => {
         response.data.question,
         "response.data.question response.data.question response.data.question "
       );
-     if (response && response.data.question != null) {
+
+      if (response.data.conditions.length !== 0) {
+        let condition = "";
+        for (let i = 0; i < response.data.conditions.length; i++) {
+          condition +=
+            " " +
+            response.data.conditions[i].common_name +
+            " with probability of " +
+            response.data.conditions[i].probability;
+        }
+        return res.status(200).json({
+          message: "Successfull",
+          success: true,
+          data: condition,
+        });
+      } else if (response && response.data.question != null) {
         const names = [];
         for (let i = 0; i < response.data.question.items.length; i++) {
           names.push({
@@ -55,7 +72,10 @@ const SymptomStore = async (req, res) => {
             },
           });
         }
-const EmptySymptomArr = await storage.store(undefined , req.query.userId)
+        const EmptySymptomArr = await storage.store(
+          "undefined",
+          req.query.userId
+        );
         return res.status(200).json({
           message: "Successfull",
           success: true,
@@ -68,15 +88,17 @@ const EmptySymptomArr = await storage.store(undefined , req.query.userId)
           req.query.symptoms,
           Userdata.Gender
         );
-        
-const EmptySymptomArr = await storage.store(undefined , req.query.userId)
+
+        const EmptySymptomArr = await storage.store(
+          "undefined",
+          req.query.userId
+        );
         return res.status(200).json({
           data: recomander,
           message: "Successfull",
         });
       }
-    } 
-    else {
+    } else {
       // if )
       let arr = Userdata.symptoms.split(",");
       if (arr.includes(data.data.mentions[0].id)) {
@@ -116,7 +138,7 @@ const getDefaultSymptoms = async (req, res) => {
       //   message: response[i].name,
       //   metadata: { KM_TRIGGER_EVENT: "symptoms" },
       // });
-      temp.push(response[i].name)
+      temp.push(response[i].name);
     }
   }
   return res.status(200).json({
