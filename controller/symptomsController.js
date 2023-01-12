@@ -30,7 +30,7 @@ const SymptomStore = async (req, res) => {
   } else if (Userdata.symptoms !== undefined || Userdata.symptoms !== null) {
     let symptomArr = Userdata.symptoms.split(",");
     console.log(symptomArr);
-    if (symptomArr.length > 2) {
+    if (symptomArr.length >= 2) {
       //  if length got more than 2 we are going with diagnosis
       console.log("In diagnosis part");
       const response = await SymptomService.symptomsDiagonsis(
