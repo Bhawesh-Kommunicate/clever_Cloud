@@ -19,7 +19,11 @@ const SymptomStore = async (req, res) => {
   );
   // console.log(data.data.mentions[0].id)
 
-  if (Userdata.symptoms == undefined || Userdata.symptoms == "undefined" || Userdata.symptoms == "not") {
+  if (
+    Userdata.symptoms == undefined ||
+    Userdata.symptoms == "undefined" ||
+    Userdata.symptoms == "not"
+  ) {
     let store = data.data.mentions[0].id;
 
     console.log("undefined wala");
@@ -28,12 +32,16 @@ const SymptomStore = async (req, res) => {
     return res.status(200).json({
       message: "Please add more symptoms",
     });
-  } else if (Userdata.symptoms !== undefined || Userdata.symptoms !== null || Userdata.symptoms !== "not") {
+  } else if (
+    Userdata.symptoms !== undefined ||
+    Userdata.symptoms !== null ||
+    Userdata.symptoms !== "not"
+  ) {
     let symptomArr = Userdata.symptoms.split(",");
     console.log(symptomArr);
     if (symptomArr.length >= 2) {
       //  if length got more than 2 we are going with diagnosis
-      const EmptySymptomArr = await storage.store("not" , req.query.userId);
+      const EmptySymptomArr = await storage.store("not", req.query.userId);
       console.log("In diagnosis part");
       const response = await SymptomService.symptomsDiagonsis(
         "token",
@@ -48,17 +56,17 @@ const SymptomStore = async (req, res) => {
 
       if (response.data.conditions.length !== 0) {
         let condition = "";
-        for (let i = 0; i < response.data.conditions.length; i++) {
-          condition +=
-            " " +
-            response.data.conditions[i].common_name +
-            " with probability of " +
-            response.data.conditions[i].probability;
-        }
+        condition += response.data.conditions.map((item) => item.common_name + " with probability "+ item.probability )
+        // for (let i = 0; i < response.data.conditions.length; i++) {
+        //   condition +=
+        //     response.data.conditions[i].common_name +
+        //     " with probability of " +
+        //     response.data.conditions[i].probability;
+        // }
         return res.status(200).json({
           message: "Successfull",
           success: true,
-          data: condition,
+          data: condition ,
         });
       } else if (response && response.data.question != null) {
         const names = [];
@@ -72,10 +80,7 @@ const SymptomStore = async (req, res) => {
             },
           });
         }
-        const EmptySymptomArr = await storage.store(
-          "not",
-          req.query.userId
-        );
+        const EmptySymptomArr = await storage.store("not", req.query.userId);
         return res.status(200).json({
           message: "Successfull",
           success: true,
@@ -89,10 +94,7 @@ const SymptomStore = async (req, res) => {
           Userdata.Gender
         );
 
-        const EmptySymptomArr = await storage.store(
-          "not",
-          req.query.userId
-        );
+        const EmptySymptomArr = await storage.store("not", req.query.userId);
         return res.status(200).json({
           data: recomander,
           message: "Successfull",
