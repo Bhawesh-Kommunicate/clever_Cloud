@@ -73,7 +73,8 @@ const SymptomStore = async (req, res) => {
           message: "Successfull",
         });
       }
-    } else {
+    } 
+    else {
       // if )
       let arr = Userdata.symptoms.split(",");
       if (arr.includes(data.data.mentions[0].id)) {
@@ -86,7 +87,7 @@ const SymptomStore = async (req, res) => {
         const SymptomStore = await storage.store(store, req.query.userId);
         // here talso we have to response for more symptoms;
         return res.status(200).json({
-          message: "Please add different symptoms",
+          message: "Please add more symptoms",
         });
       }
     }
