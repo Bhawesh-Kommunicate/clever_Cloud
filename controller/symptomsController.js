@@ -55,7 +55,7 @@ const SymptomStore = async (req, res) => {
             },
           });
         }
-
+const EmptySymptomArr = await storage.store(undefined , req.query.userId)
         return res.status(200).json({
           message: "Successfull",
           success: true,
@@ -68,6 +68,8 @@ const SymptomStore = async (req, res) => {
           req.query.symptoms,
           Userdata.Gender
         );
+        
+const EmptySymptomArr = await storage.store(undefined , req.query.userId)
         return res.status(200).json({
           data: recomander,
           message: "Successfull",
