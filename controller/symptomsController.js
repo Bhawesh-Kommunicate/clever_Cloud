@@ -65,7 +65,7 @@ const SymptomStore = async (req, res) => {
         // }
         return res.status(200).json({
           message: "Successfull",
-          success: true,
+          // success: true,
           data: condition ,
         });
       } else if (response && response.data.question != null) {
