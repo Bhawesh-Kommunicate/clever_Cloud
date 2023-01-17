@@ -1,5 +1,6 @@
 var axios = require("axios");
 require("dotenv").config();
+const confige = require("../config/config.json")
 const storeSymptom = async (userId, symptoms) => {
     console.log(userId)
   var data = JSON.stringify({
@@ -10,7 +11,8 @@ const storeSymptom = async (userId, symptoms) => {
 
   var config = {
     method: "post",
-    url: "https://services.kommunicate.io/rest/ws/user/update",
+    // url: "https://services.kommunicate.io/rest/ws/user/update",
+    url : confige.kommunicateUpdate,
     headers: {
       "Api-Key": `${process.env.Kommunicate_Key}`,
       "Of-User-Id": `${userId}`,
@@ -44,7 +46,8 @@ const symptomsData = async(text , age)=>{
       
       var config = {
         method: 'post',
-        url: 'https://api.infermedica.com/v3/parse',
+        // url: 'https://api.infermedica.com/v3/parse',
+        url : confige.infermidicaParse,
         headers: { 
           'App-Id': process.env.api_id, 
           'App-Key': process.env.api_key, 
@@ -81,10 +84,11 @@ var data = JSON.stringify({
 
 var config = {
   method: 'post',
-  url: 'https://api.infermedica.com/v3/diagnosis',
+  // url: 'https://api.infermedica.com/v3/diagnosis',
+  url : confige.infermedicaDiagnosis,
   headers: { 
-    'App-Id': '6b2c1128', 
-    'App-Key': 'ed31ef2357c0a91740327294a146c97d', 
+    'App-Id': process.env.api_id, 
+    'App-Key': process.env.api_key, 
     'Content-Type': 'application/json'
   },
   data : data

@@ -1,0 +1,8 @@
+{
+    "kommunicateUpdate" : "https://services.kommunicate.io/rest/ws/user/update",
+    "kommunicateData" : "https://services.kommunicate.io/rest/ws/user/v2/detail",
+    "infermedicaDiagnosis" :"https://api.infermedica.com/v3/diagnosis",
+    "infermidicaParse" : "https://api.infermedica.com/v3/parse",
+    "infermedicaSepcialist" : "https://api.infermedica.com/v3/recommend_specialist",
+    "infermedicaDefaultSymptoms" : "https://api.infermedica.com/v3/symptoms"
+}

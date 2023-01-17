@@ -1,4 +1,6 @@
 var axios = require("axios");
+// const { config } = require("dotenv");
+const confige = require("../config/config.json")
 require("dotenv").config();
 const age = (userId, age) => {
   var data = JSON.stringify({
@@ -9,7 +11,8 @@ const age = (userId, age) => {
 
   var config = {
     method: "post",
-    url: "https://services.kommunicate.io/rest/ws/user/update",
+    // url: "https://services.kommunicate.io/rest/ws/user/update",
+    url :confige.kommunicateUpdate,
     headers: {
       "Api-Key": `${process.env.Kommunicate_Key}`,
       "Of-User-Id": `${userId}`,

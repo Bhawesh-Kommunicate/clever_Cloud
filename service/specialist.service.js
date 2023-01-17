@@ -1,6 +1,6 @@
 var axios = require('axios');
 require(`dotenv`).config()
-
+const confige = require("../config/config.json")
 const specialist = async (age,symptoms,Gender)=>{
     var data = JSON.stringify({
         "sex": `${Gender}`,
@@ -19,7 +19,8 @@ const specialist = async (age,symptoms,Gender)=>{
       
       var config = {
         method: 'post',
-        url: 'https://api.infermedica.com/v3/recommend_specialist',
+        // url: 'https://api.infermedica.com/v3/recommend_specialist',
+        url :confige.infermedicaSepcialist,
         headers: { 
           'Content-Type': 'application/json', 
           'Accept': 'application/json', 

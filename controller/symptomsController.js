@@ -5,7 +5,7 @@ const SymptomService = require("../service/symptomStore.service");
 const storage = require("../service/store.service");
 const userInfo = require("../service/userDetails");
 const { specialist } = require("../service/specialist.service");
-
+const confige = require("../config/config.json");
 const SymptomStore = async (req, res) => {
   console.log(req.query.userId);
   console.log(req.query.symptoms);
@@ -56,7 +56,14 @@ const SymptomStore = async (req, res) => {
 
       if (response.data.conditions.length !== 0) {
         let condition = "";
-        condition += " "+ response.data.conditions.map((item) => item.common_name + " with Possibility of "+ Number(item.probability*100) )
+        condition +=
+          " " +
+          response.data.conditions.map(
+            (item) =>
+              item.common_name +
+              " with Possibility of " +
+              Number(item.probability * 100)
+          );
         // for (let i = 0; i < response.data.conditions.length; i++) {
         //   condition +=
         //     response.data.conditions[i].common_name +
@@ -66,7 +73,7 @@ const SymptomStore = async (req, res) => {
         return res.status(200).json({
           message: "Successfull",
           // success: true,
-          data: condition ,
+          data: condition,
         });
       } else if (response && response.data.question != null) {
         const names = [];
@@ -130,7 +137,7 @@ const getDefaultSymptoms = async (req, res) => {
   let temp = [];
 
   const response = await getSymptomsData(
-    "https://api.infermedica.com/v3/symptoms",
+    confige.infermedicaDefaultSymptoms,
     Userdata.age
   );
   for (let i = 0; i < response.length; i++) {
