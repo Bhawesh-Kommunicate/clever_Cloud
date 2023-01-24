@@ -1,12 +1,12 @@
-var axios = require("axios");
+const axios = require("axios");
+require("dotenv").config();
 const confige = require("../config/config.json");
-const gender = (sex, userId) => {
-  var data = JSON.stringify({
+const store = async (symptoms, userId) => {
+  data = JSON.stringify({
     metadata: {
-      Gender: `${sex}`,
+      symptoms: `${symptoms}`,
     },
   });
-
   var config = {
     method: "post",
     url: confige.kommunicateUpdate,
@@ -23,12 +23,12 @@ const gender = (sex, userId) => {
       return response.data;
     })
     .catch(function (error) {
-      return error;
+      return error
     });
 
   return response;
 };
 
 module.exports = {
-  gender,
+  store,
 };

@@ -1,9 +1,10 @@
 var axios = require("axios");
 const confige = require("../config/config.json");
-const gender = (sex, userId) => {
+require("dotenv").config();
+const age = (userId, age) => {
   var data = JSON.stringify({
     metadata: {
-      Gender: `${sex}`,
+      age: `${age}`,
     },
   });
 
@@ -23,12 +24,12 @@ const gender = (sex, userId) => {
       return response.data;
     })
     .catch(function (error) {
-      return error;
+      return err
     });
 
   return response;
 };
 
 module.exports = {
-  gender,
+  age,
 };
